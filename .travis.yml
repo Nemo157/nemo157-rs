@@ -39,7 +39,7 @@ matrix:
     rust: stable
     script:
     - gpg --import .authorized_keys
-    - git tag --verify "$TAG"
+    - git tag --verify "$TRAVIS_TAG"
     deploy:
       provider: cratesio
       token:
