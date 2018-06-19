@@ -37,7 +37,9 @@ matrix:
     - cargo clippy -- -D warnings
   - stage: deploy
     rust: stable
-    script: skip
+    script:
+    - gpg --import .authorized_keys
+    - git tag --verify "$TAG"
     deploy:
       provider: cratesio
       token:
