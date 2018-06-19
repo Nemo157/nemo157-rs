@@ -38,6 +38,7 @@ matrix:
   - stage: deploy
     rust: stable
     script:
+    - grep 'version = "'"$TRAVIS_TAG"'"' Cargo.toml
     - gpg --import .authorized_keys
     - git tag --verify "$TRAVIS_TAG"
     deploy:
