@@ -43,3 +43,5 @@ matrix:
     deploy:
       provider: script
       script: echo 'deploying' && tree
+      on:
+        all_branches: true
