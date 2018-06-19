@@ -30,3 +30,13 @@ matrix:
     - which cargo-clippy || cargo install clippy --version $CLIPPY_VERSION
     script:
     - cargo clippy -- -D warnings
+  - stage: deploy
+    rust: stable
+    script: skip
+    before_deploy:
+    - cargo package
+    deploy:
+      provider: script
+      script: echo 'deploying' && tree
+      on:
+        tags: true
