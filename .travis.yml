@@ -38,7 +38,7 @@ matrix:
   - stage: deploy
     rust: stable
     script:
-    - grep 'version = "'"$TRAVIS_TAG"'"' Cargo.toml
+    - grep 'version = "'"$TRAVIS_TAG"'"' Cargo.toml || echo 'Tag does not match version in Cargo.toml'
     - gpg --import .authorized_keys
     - git tag --verify "$TRAVIS_TAG"
     deploy:
