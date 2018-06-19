@@ -41,7 +41,10 @@ matrix:
     before_deploy:
     - cargo package
     deploy:
-      provider: script
-      script: echo 'deploying' && tree
+      provider: cratesio
+      skip_cleanup: true
+      edge:
+        source: Nemo157/dpl
+        branch: crates.io
       on:
         all_branches: true
