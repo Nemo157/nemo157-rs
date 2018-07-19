@@ -42,7 +42,7 @@ matrix:
     - gpg --import .authorized_keys
     - git tag --verify "$TRAVIS_TAG"
     deploy:
-      provider: cratesio
+      provider: cargo
       token:
         secure: aTakje4LmBBQhRX5RVxUbrZhthzDIYpPUg1agayXVp+j3LXRMwlh8au6qLEupYCglp2wHZ3FLd0bW3fIaSPjOjC/aySdMdgszJR71ytajYW7F50Gkeoc+e3dr7vI+8Ay3lG/I+9kPPdc38WjguvqWzMwqp6CDCfYDfzf4msAy4lvsg7gf2SWmcr8Cush0CGsp1no4hANRCiWuwbg2kVF2ii8ZUYDXQh1Td6kqOQxLqBvNH6TuQFeAnkUZ1gFgR3EDID1Tys7IRaB49z6D+6o3nR+LeJUVuF+DVav9MPDlrYlvUX42uVpXc/+1K9sUUmuPKFT6N/MuZf0huQ7ryH23wvwFUkeYV0mPeNDjMzZmFPL2ns27fJkt+KkF1uEcuMWiNHcbant5a8bb7Ylj19JG0Gr3M9zl/Z02sMzNNvLCmvZklgGdvTOhqaLyCxyaqcDzBO1FOf/lgrqymsFAUmT6UWxnW3vWWqydjxxv+tlppG10wWjmQuOBfKjehl2qt0l38zh0ZEN6AUkQgD5Wds6DpQhzkyn9Bx7cS6UEnbIp64XxvRFCvgBRvlp1ZIhFSScS7vbHJ1VolfcA3d2ig3U1pM7j995g8D6g+rdKv7XwzHJOu5HBL9r1DnGd4ypN0IAJlZ+uYbWSqNeQ0f40/Fgmpjv20m47WN/R9OL/acsAGI=
       edge:
