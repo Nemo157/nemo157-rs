@@ -1,6 +1,6 @@
 [package]
 name = "nemo157"
-version = "0.2.1"
+version = "0.3.0"
 authors = ["Wim Looman <wim@nemo157.com>"]
 description = """
 This is a test repository/package for me to try out crates.io features and
