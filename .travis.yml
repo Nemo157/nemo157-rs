@@ -51,3 +51,9 @@ matrix:
         branch: crates.io
       on:
         all_branches: true
+
+branches:
+  only:
+  - staging
+  - trying
+  - master
