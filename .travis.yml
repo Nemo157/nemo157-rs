@@ -8,10 +8,11 @@ stages:
   if: tag IS present
 
 rust:
-- 1.20.0
-- stable
-- beta
+- nightly-2018-11-03
 - nightly
+- beta
+- stable
+- 1.20.0
 
 script:
 - cargo test --all
@@ -21,20 +22,31 @@ matrix:
   allow_failures:
   - rust: nightly
   include:
-  - os: osx
+  - name: cargo test
     rust: stable
-  - env: RUSTFMT
-    rust: nightly-2018-06-18
+    os: osx
+
+  - name: cargo test
+    rust: stable
+    os: windows
+
+  - name: cargo test -Z minimal-versions
+    script:
+    - cargo update -Z minimal-versions
+    - cargo test --all
+
+  - name: cargo fmt
     install:
     - rustup component add rustfmt-preview
     script:
-    - cargo fmt -- --check
-  - env: CLIPPY
-    rust: nightly-2018-07-18
+    - cargo fmt --all -- --check
+
+  - name: cargo clippy
     install:
     - rustup component add clippy-preview
     script:
-    - cargo clippy -- -D warnings
+    - cargo clippy --all --all-targets -- -D warnings
+
   - stage: deploy
     rust: stable
     script:
@@ -50,3 +62,6 @@ matrix:
         branch: crates.io
       on:
         all_branches: true
+
+branches:
+  only: [staging, trying, master]
