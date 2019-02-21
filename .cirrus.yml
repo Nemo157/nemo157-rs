@@ -1,0 +1,28 @@
+container:
+  image: rust:latest
+
+task:
+  name: cargo test --all
+  test_script:
+  - cargo test --all
+
+task:
+  name: cargo test -Z minimal-versions
+  update_script:
+  - cargo update -Z minimal-versions
+  test_script:
+  - cargo test --all
+
+task:
+  name: cargo fmt
+  install_script:
+  - rustup component add rustfmt
+  test_script:
+  - cargo fmt --all -- --check
+
+task:
+  name: cargo clippy
+  install_script:
+  - rustup component add clippy
+  test_script:
+  - cargo clippy --all --all-targets -- -D warnings
