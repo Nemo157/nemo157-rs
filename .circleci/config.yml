@@ -31,6 +31,8 @@ jobs:
     steps:
     - checkout
     - run:
+        command: rustup default nightly
+    - run:
         command: cargo update -Z minimal-versions
     - run:
         command: cargo test
