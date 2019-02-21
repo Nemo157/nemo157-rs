@@ -8,6 +8,8 @@ task:
 
 task:
   name: cargo test -Z minimal-versions
+  install_script:
+  - rustup default nightly
   update_script:
   - cargo update -Z minimal-versions
   test_script:
