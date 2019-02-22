@@ -1,22 +1,14 @@
 version: 2.1
 
+orbs:
+  rust: nemo157/rust@dev:alpha
+
 executors:
   rust:
     docker:
     - image: circleci/rust:latest
 
 jobs:
-  build:
-    executor: rust
-    steps:
-    - checkout
-    - run:
-        command: cargo build
-    - persist_to_workspace:
-        root: target
-        paths:
-        - debug
-
   test:
     executor: rust
     steps:
@@ -61,12 +53,12 @@ workflows:
   version: 2.1
   test:
     jobs:
-    - build
+    - rust/build
     - test:
         requires:
-        - build
+        - rust/build
     - minimal
     - fmt
     - clippy:
         requires:
-        - build
+        - rust/build
