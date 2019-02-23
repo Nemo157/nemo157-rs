@@ -19,6 +19,7 @@ workflows:
         requires:
         - rust/build
     - rust/test:
+        name: rust/test minimal-versions
         toolchain: nightly
         minimal-versions: true
         attach-workspace: false
