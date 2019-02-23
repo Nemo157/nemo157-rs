@@ -4,4 +4,24 @@ orbs:
   rust: nemo157/rust@dev:alpha
 
 workflows:
-  rust/full: {}
+  version: 2.1
+  test:
+    jobs:
+    - rust/check
+    - rust/fmt
+    - rust/build:
+        requires:
+        - rust/check
+    - rust/clippy:
+        requires:
+        - rust/check
+    - rust/test:
+        requires:
+        - rust/build
+    - rust/test:
+        name: rust/test minimal-versions
+        toolchain: nightly
+        minimal-versions: true
+        attach-workspace: false
+        requires:
+        - rust/check
