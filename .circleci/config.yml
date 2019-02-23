@@ -18,7 +18,7 @@ workflows:
         minimal-versions: true
         requires: [rust/check]
     triggers:
-      schedule:
+    - schedule:
         cron: "0 0 * * *"
         branches:
           only: [master]
