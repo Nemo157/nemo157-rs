@@ -3,45 +3,24 @@ version: 2.1
 orbs:
   rust: nemo157/rust@dev:alpha
 
-executors:
-  rust:
-    docker:
-    - image: circleci/rust:latest
-
-jobs:
-  minimal:
-    executor: rust
-    steps:
-    - checkout
-    - run:
-        command: rustup default nightly
-    - run:
-        command: cargo update -Z minimal-versions
-    - run:
-        command: cargo test
-
-  fmt:
-    executor: rust
-    steps:
-    - checkout
-    - run:
-        command: rustup component add rustfmt
-    - run:
-        command: cargo fmt --all -- --check
-
 workflows:
   version: 2.1
   test:
     jobs:
     - rust/check
+    - rust/fmt
     - rust/build:
+        requires:
+        - rust/check
+    - rust/clippy:
         requires:
         - rust/check
     - rust/test:
         requires:
         - rust/build
-    - rust/clippy:
+    - rust/test:
+        toolchain: nightly
+        minimal-versions: true
+        attach-workspace: false
         requires:
-        - rust/build
-    - minimal
-    - fmt
+        - rust/check
