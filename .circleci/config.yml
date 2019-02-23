@@ -9,15 +9,6 @@ executors:
     - image: circleci/rust:latest
 
 jobs:
-  test:
-    executor: rust
-    steps:
-    - checkout
-    - attach_workspace:
-        at: target
-    - run:
-        command: cargo test
-
   minimal:
     executor: rust
     steps:
@@ -38,27 +29,19 @@ jobs:
     - run:
         command: cargo fmt --all -- --check
 
-  clippy:
-    executor: rust
-    steps:
-    - checkout
-    - attach_workspace:
-        at: target
-    - run:
-        command: rustup component add clippy
-    - run:
-        command: cargo clippy --all --all-targets -- -D warnings
-
 workflows:
   version: 2.1
   test:
     jobs:
-    - rust/build
-    - test:
+    - rust/check
+    - rust/build:
+        requires:
+        - rust/check
+    - rust/test:
+        requires:
+        - rust/build
+    - rust/clippy:
         requires:
         - rust/build
     - minimal
     - fmt
-    - clippy:
-        requires:
-        - rust/build
