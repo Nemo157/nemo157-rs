@@ -20,5 +20,4 @@ workflows:
     triggers:
     - schedule:
         cron: "0 0 * * *"
-        branches:
-          only: [master]
+        filters: {branches: {only: [master]}}
