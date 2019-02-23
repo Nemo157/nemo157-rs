@@ -9,19 +9,16 @@ workflows:
     jobs:
     - rust/check
     - rust/fmt
-    - rust/build:
-        requires:
-        - rust/check
     - rust/clippy:
-        requires:
-        - rust/check
+        requires: [rust/check]
     - rust/test:
-        requires:
-        - rust/build
+        requires: [rust/check]
     - rust/test:
         name: rust/test minimal-versions
-        toolchain: nightly
         minimal-versions: true
-        attach-workspace: false
-        requires:
-        - rust/check
+        requires: [rust/check]
+    triggers:
+      schedule:
+        cron: "0 0 * * *"
+        branches:
+          only: [master]
