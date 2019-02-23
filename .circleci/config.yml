@@ -17,6 +17,19 @@ workflows:
         name: rust/test minimal-versions
         minimal-versions: true
         requires: [rust/check]
+
+  daily:
+    jobs:
+    - rust/check
+    - rust/fmt
+    - rust/clippy:
+        requires: [rust/check]
+    - rust/test:
+        requires: [rust/check]
+    - rust/test:
+        name: rust/test minimal-versions
+        minimal-versions: true
+        requires: [rust/check]
     triggers:
     - schedule:
         cron: "0 0 * * *"
