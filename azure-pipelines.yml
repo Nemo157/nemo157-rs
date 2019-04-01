@@ -1,0 +1,14 @@
+resources:
+  repositories:
+  - repository: rust
+    type: github
+    name: Nemo157/azure-rust
+    endpoint: Nemo157
+    ref: refs/heads/initial
+
+jobs:
+- template: full.yml@rust
+
+trigger:
+- master
+- staging
