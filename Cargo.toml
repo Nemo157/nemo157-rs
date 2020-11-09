@@ -1,6 +1,6 @@
 [package]
 name = "nemo157"
-version = "0.3.1-pre.2"
+version = "0.3.1-pre.3"
 authors = ["Wim Looman <wim@nemo157.com>"]
 description = """
 This is a test repository/package for me to try out crates.io features and
@@ -8,5 +8,17 @@ integrations without publishing any of my real crates.
 """
 license = "WTFPL"
 repository = "https://github.com/Nemo157/nemo157-rs"
+edition = "2018"
 
 [dependencies]
+
+[[bin]]
+name = "nemo157"
+doc = true
+
+[lib]
+name = "me"
+
+[[example]]
+name = "test_docs_rs"
+doc = true
